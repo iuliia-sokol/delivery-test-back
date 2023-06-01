@@ -1,6 +1,6 @@
 const { ctrlWrapper } = require("../helpers");
 
-const { Shops } = require('../../models/shops');
+const { Shops } = require('../models/shops');
 
 const getShops = async (req, res, next) => {
   try {
