@@ -1,3 +1,4 @@
+const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 
 const shopsSchema = new Schema(
@@ -18,22 +19,32 @@ const shopsSchema = new Schema(
       type:Array,
       required:false
     },
-    logo:{
-      type:String,
-      required:false
+    avatarURL: {
+      type: String,
+      default: "",
     },
-    _id:{
-      type:String,
-      required:true
-    }
   },
   { collection : 'shops',  versionKey: false, timestamps: true }
 );
 
+const updateSchema = Joi.object({
+  name: Joi.string().min(3).max(30),
+  price: Joi.string(),
+  cuisine: Joi.array(),
+  dishes: Joi.array(),
+  avatarURL: Joi.string(),
+});
+
+
+const schemas = {
+ 
+  updateSchema,
+};
 
 
 const Shops = model("shops", shopsSchema);
 
 module.exports = {
   Shops,
+  schemas
 };
