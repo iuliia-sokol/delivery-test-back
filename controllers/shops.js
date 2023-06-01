@@ -4,7 +4,8 @@ const { Shops } = require('../models/shops');
 
 const getShops = async (req, res, next) => {
   try {
-    const result = await Shops.find({});
+    const result = await Shops.find();
+    console.log(result);
 
     res.json({
       status: 'success',

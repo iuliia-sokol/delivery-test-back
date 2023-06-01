@@ -10,8 +10,24 @@ const shopsSchema = new Schema(
       type: Array,
       required: true,
     },
+    price: {
+      type: Number,
+      required: false
+    },
+    cuisine:{
+      type:Array,
+      required:false
+    },
+    logo:{
+      type:String,
+      required:false
+    },
+    _id:{
+      type:String,
+      required:true
+    }
   },
-  { versionKey: false, timestamps: true }
+  { collection : 'shops',  versionKey: false, timestamps: true }
 );
 
 

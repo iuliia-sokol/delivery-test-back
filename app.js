@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 // const historyRouter = require("./routes/api/history");
-const cartRouter = require("./routes/api/cart");
+const shopsRouter = require("./routes/api/shops");
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // app.use("/api/history", historyRouter);
-app.use("/api/cart", cartRouter);
+app.use("/api/shops", shopsRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
