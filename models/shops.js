@@ -37,7 +37,6 @@ const updateSchema = Joi.object({
 
 
 const schemas = {
- 
   updateSchema,
 };
 

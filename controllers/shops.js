@@ -7,6 +7,7 @@ const { ctrlWrapper, HttpError } = require("../helpers");
 const { Shops } = require('../models/shops');
 
 const avatarDir = path.join(__dirname, "../", "public", "avatars");
+const productDir = path.join(__dirname, "../", "public", "products");
 
 const avatarWidth = 250;
 const avatarHeight = 250;
@@ -69,8 +70,47 @@ const updateAvatar = async (req, res) => {
 };
 
 
+const updateDishPicture = async (req, res) => {
+ 
+  const { id, name } = req.params;
+
+  if (!req.file) {
+    throw HttpError(400, "Picture must be provided");
+  }
+  const { path: tempUpload, originalname } = req.file;
+
+  const uniqueID = nanoid();
+  const filename = `${uniqueID}${originalname}`;
+  const resultUpload = path.join(productDir, filename);
+
+  const productURL = path.join("products", filename);
+
+  await Jimp.read(tempUpload)
+    .then((avatar) => {
+      return avatar.resize(avatarWidth, avatarHeight).write(tempUpload);
+    })
+    .catch((err) => {
+      throw err;
+    });
+
+  await fs.rename(tempUpload, resultUpload);
+  const shop =  await Shops.findById(id)
+
+  const product = shop.dishes.find(item=>item.id.toString() === name.toString())
+
+  product.pictureURL = productURL
+
+  console.log(product);
+
+  await Shops.findByIdAndUpdate(id, { dishes: shop.dishes });
+  res.json({
+    productURL,
+  });
+};
+
 module.exports = {
   getShops: ctrlWrapper(getShops),
   updateById: ctrlWrapper(updateById),
   updateAvatar: ctrlWrapper(updateAvatar),
+  updateDishPicture: ctrlWrapper(updateDishPicture)
 };
