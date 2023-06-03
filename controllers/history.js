@@ -1,4 +1,4 @@
-const { History } = require('../../models/history');
+const { History } = require('../models/history');
 const { ctrlWrapper} = require("../helpers");
 
 
@@ -22,7 +22,7 @@ const setHistory = async (req, res, next) => {
 
 const getHistory = async (res, next) => {
     try {
-      const result = await History.find({});
+      const result = await History.find();
   
       res.json({
         status: 'success',

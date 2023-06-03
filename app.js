@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-// const historyRouter = require("./routes/api/history");
+const historyRouter = require("./routes/api/history");
 const shopsRouter = require("./routes/api/shops");
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-// app.use("/api/history", historyRouter);
+app.use("/api/history", historyRouter);
 app.use("/api/shops", shopsRouter);
 
 app.use((req, res) => {

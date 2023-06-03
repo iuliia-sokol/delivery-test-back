@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const orderSchema = Schema({
-    itemId: {
+    id: {
       type: String,
       required: true,
     },
@@ -17,10 +17,14 @@ const orderSchema = Schema({
       type: String,
       required: true,
     },
-    photo: {
+    pictureURL: {
       type: String,
       required: true,
     },
+    shopId: {
+        type: String,
+        required: true,
+    }
   });
   
 
@@ -51,7 +55,7 @@ const orderSchema = Schema({
         required: true,
       },
     },
-    { timestamps: true, versionKey: false }
+    { collection : 'history', timestamps: true, versionKey: false }
   );
   
 const History = model('History', historySchema);
