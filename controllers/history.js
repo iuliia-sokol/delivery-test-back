@@ -20,7 +20,7 @@ const setHistory = async (req, res, next) => {
   }
 };
 
-const getHistory = async (res, next) => {
+const getHistory = async (req, res, next) => {
     try {
       const result = await History.find();
   
